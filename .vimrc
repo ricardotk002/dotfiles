@@ -1,3 +1,4 @@
+set shell=/bin/sh
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -11,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " My Bundles
 Plugin 'wincent/command-t'
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -36,8 +38,16 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
+" Set font
+if has("gui_running")
+  set guifont=Monaco
+end
+
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+noremap <Down> :echoe "Use j"<CR>
+
+" Nerdtree conf
+map <C-n> :NERDTreeToggle<CR>
