@@ -1,6 +1,28 @@
+" ~/.vimrc
+set encoding=utf-8
 set shell=/bin/sh
+
 set nocompatible              " be iMproved, required
-filetype off                  " required
+set autoindent                " set auto indent
+set ts=2                      " set indent to 2 spaces
+set shiftwidth=2
+set showmatch                 " show bracket matches
+set ignorecase                " ignore case in searches
+set hlsearch                  " highlight all search matches
+set cursorline                " highlight current line
+set smartcase                 " pay attention to case when caps are used
+set incsearch                 " show search results as I type
+set vb                        " enable visual bell (disable audio bell)
+set ruler                     " show row and column in footer
+set scrolloff=2               " minimum lines above/below cursor
+set laststatus=2              " always show last status
+set list listchars=tab:»·,trail:· " show extra space characters
+set nofoldenable              " disable code folding
+set clipboard=unnamed         " use the system clipboard
+set backspace=2               " Disable the delete button (backspace) in normal mode
+set number                    " Enable the line numbers
+" set numberwidth=5
+set noswapfile                " Disable swap files creation
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -17,17 +39,6 @@ Plugin 'scrooloose/nerdtree'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
-" Defaults
-set backspace=2           " Disable the delete button (backspace) in normal mode
-set number                " Enable the line numbers
-set numberwidth=5
-set noswapfile            " Disable swap files creation
-set ruler                 " Show the cursor position all the time
-set laststatus=2          " Always display the status line
-set showcmd               " Display incomplete commands
-set cursorline
-hi cursorline cterm=none term=none
 
 " Color scheme
 color Tomorrow-Night
@@ -51,3 +62,7 @@ noremap <Down> :echoe "Use j"<CR>
 
 " Nerdtree conf
 map <C-n> :NERDTreeToggle<CR>
+
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlP'
+
