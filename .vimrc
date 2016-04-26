@@ -16,7 +16,7 @@ set vb                        " enable visual bell (disable audio bell)
 set ruler                     " show row and column in footer
 set scrolloff=2               " minimum lines above/below cursor
 set laststatus=2              " always show last status
-set list listchars=tab:»·,trail:· " show extra space characters
+set list listchars=tab:··,trail:· " show extra space characters
 set nofoldenable              " disable code folding
 set clipboard=unnamed         " use the system clipboard
 set backspace=2               " Disable the delete button (backspace) in normal mode
@@ -33,8 +33,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " My Bundles
-Plugin 'wincent/command-t'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-endwise'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -63,6 +65,9 @@ noremap <Down> :echoe "Use j"<CR>
 " Nerdtree conf
 map <C-n> :NERDTreeToggle<CR>
 
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_cmd = 'CtrlP'
-
+" CtrlP configuration
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_max_height = 10
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 0
