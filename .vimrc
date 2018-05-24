@@ -49,6 +49,8 @@ Plugin 'mxw/vim-jsx'
 " Plugin 'rizzatti/dash.vim'
 Plugin 'w0rp/ale'
 " Plugin 'morhetz/gruvbox'
+" Plugin 'hwartig/vim-seeing-is-believing'
+Plugin 'junegunn/fzf.vim'
 
 " Open new split panes naturally to the right and bottom
 set splitbelow
