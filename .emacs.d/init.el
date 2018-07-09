@@ -6,7 +6,7 @@
 
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-;; (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 ;; package config
 (require 'package)
@@ -31,19 +31,35 @@
 (use-package diminish
   :ensure t)
 
+;; TODO: use-package's map binding doesn't work
+(defun set-ido-keys ()
+  (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)
+  (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
+  (define-key ido-completion-map (kbd "<left>") 'ido-delete-backward-updir)
+  (define-key ido-completion-map (kbd "<right>") 'ido-exit-minibuffer)
+  )
+(add-hook 'ido-setup-hook #'set-ido-keys)
+
 (use-package ido
-  :init (ido-mode 1))
+  :init (progn (ido-mode 1)))
 
 (use-package ido-vertical-mode
   :ensure t
   :init (progn
-          (ido-vertical-mode 1)
-          (setq ido-vertical-indicator "↣")))
+	  (ido-vertical-mode 1)
+	  (setq ido-vertical-indicator "↣")))
 
 (use-package evil
   :ensure t
   :init (progn
-          (evil-mode 1)))
+	  (evil-mode 1))
+  :config (progn
+	    (setq evil-move-cursor-back nil)))
+
+(use-package evil-commentary
+  :ensure t
+  :init (progn
+	  (evil-commentary-mode 1)))
 
 (use-package magit
   :ensure t
@@ -70,149 +86,54 @@
   :ensure t
   :mode "\\.jsx\\'")
 
-(use-package atom-one-dark-theme
+(use-package helm
   :ensure t
-  :config (load-theme 'atom-one-dark t))
+  :bind (("M-x" . helm-M-x)
+	 ("C-x b" . helm-mini)))
 
-(when (eq system-type 'darwin)
-  (set-face-attribute 'default nil :family "Monaco")
-  (set-face-attribute 'default nil :height 140))
+(use-package exec-path-from-shell
+  :ensure t
+  :config (exec-path-from-shell-initialize))
 
-;; ;; Added by Package.el.  This must come before configurations of
-;; ;; installed packages.  Don't delete this line.  If you don't want it,
-;; ;; just comment it out by adding a semicolon to the start of the line.
-;; ;; You may delete these explanatory comments.
-;; (package-initialize)
+;; web-mode
+(use-package web-mode
+  :ensure t)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 
-;; (require 'exec-path-from-shell)
-;; (exec-path-from-shell-initialize)
+;; Ruby config
+(use-package rvm
+  :ensure t)
 
-;; (add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
-;; (require 'init-better-defaults)
-;; (require 'init-theme)
-;; (require 'init-font)
-;; (require 'init-packages)
-;; (require 'init-evil)
-;; (require 'init-magit)
-;; (require 'init-web-mode)
-;; (require 'init-helm)
-;; (require 'init-ido)
+(use-package ruby-mode
+  :mode "\\.rb\\'"
+  :hook (ruby-mode . rvm-activate-corresponding-ruby))
 
-;; (require 'flycheck)
-;; (add-hook 'prog-mode 'flycheck-mode)
-;; (global-flycheck-mode)
-;; (setq-default flycheck-disabled-checkers '(ruby-reek))
-
-;; (require 'rspec-mode)
-;; (eval-after-load 'rspec-mode
-;;   '(rspec-install-snippets))
-
-;; (require 'evil-surround)
+;; Flycheck
+(use-package flycheck
+  :ensure t
+  :hook (prog-mode . flycheck-mode)
+  :config (setq-default flycheck-disabled-checkers '(ruby-reek)))
 
 ;; ;; rvm.el activates the right Ruby version
 ;; (add-hook 'ruby-mode-hook
 ;;           (lambda () (rvm-activate-corresponding-ruby)))
 
-;; (require 'powerline)
-;; (powerline-center-theme)
+;; (use-package atom-one-dark-theme
+;;   :ensure t
+;;   :config (load-theme 'atom-one-dark t))
 
-;; (display-time-mode)
+(use-package dracula-theme
+  :ensure t
+  :config (load-theme 'dracula t))
 
-;; (require 'diminish)
-;; (diminish 'jiggle-mode)
+(when (eq system-type 'darwin)
+  (set-face-attribute 'default nil :family "Monaco")
+  (set-face-attribute 'default nil :height 140))
 
-;; (require 'ox-reveal)
-
-;; ;; start magit in a full-screen buffer
-;; ;; (setq magit-display-buffer-function 'switch-to-buffer)
-
-;; (setq inhibit-splash-screen t)
-;; (setq package-list '(better-defaults
-;;                      web-mode
-;;                      neotree
-;;                      evil
-;;                      evil-magit
-;;                      atom-one-dark-theme
-;;                      helm
-;;                      helm-projectile
-;;                      helm-ag
-;;                      ruby-electric
-;;                      seeing-is-believing
-;;                      rvm
-;;                      robe
-;;                      evil-commentary
-;;                      ido-vertical-mode
-;;                      linum-relative
-;;                      column-marker))
-;; (evil-commentary-mode)
-
-;; (dolist (package package-list)
-;;   (unless (package-installed-p package)
-;;     (package-install package)))
-
-;; (setq js-indent-level 2)
-
-;; (global-set-key (kbd "M-x") #'helm-M-x)
-;; ;; TODO: helm-ag isn't working with system's ag
-;; (global-set-key (kbd "s-f") #'helm-projectile-ag)
-;; (global-set-key (kbd "s-t") #'helm-projectile-find-file-dwim)
-
-;; (global-set-key (kbd "C-c s") 'magit-status)
-
-;; (global-set-key (kbd "C-c j") 'robe-jump)
-;; (global-set-key (kbd "C-c b") 'pop-tag-mark)
-
-;; (defun set-ido-keys ()
-;;   (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)
-;;   (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
-;;   (define-key ido-completion-map (kbd "<left>") 'ido-delete-backward-updir)
-;;   (define-key ido-completion-map (kbd "<right>") 'ido-exit-minibuffer)
-;;   )
-
-;; (add-hook 'ido-setup-hook #'set-ido-keys)
-
-;; ;; (add-hook 'abg-code-modes-hook
-;; ;;           (lambda () (linum-mode 1)))
-
-;; ;; (add-hook 'ruby-mode-hook
-;; ;;           (lambda () (run-hooks 'abg-code-modes-hook)))
-
-;; ;; Line and column numbers
-;; ;; (linum-on)
-;; (setq column-number-mode t)
-;; (require 'linum-relative)
-;; (global-linum-mode)
-;; (with-eval-after-load 'linum
-;;   (linum-relative-toggle))
-;; ;; (linum-relative-mode)
-
-;; ;; Move lines up and down
-;; (defun move-line-up ()
-;;   "Move up to the current line."
-;;   (interactive)
-;;   (transpose-lines 1)
-;;   (forward-line -2)
-;;   (indent-according-to-mode))
-
-;; (defun move-line-down ()
-;;   "Move up to the current line."
-;;   (interactive)
-;;   (forward-line 1)
-;;   (transpose-lines 1)
-;;   (forward-line -1)
-;;   (indent-according-to-mode))
-
-;; (global-set-key [(meta shift up)] 'move-line-up)
-;; (global-set-key [(meta shift down)] 'move-line-down)
-
-;; (add-hook 'ruby-mode-hook 'robe-mode)
-;; (defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
-;;   (rvm-activate-corresponding-ruby))
-
-;; (rvm-use-default)
-;; ;; (setq seeing-is-believing-prefix "C-0")
-;; ;; (add-hook 'ruby-mode-hook 'seeing-is-believing)
-;; ;; (require 'seeing-is-believing)
-
-;; (setq custom-file "~/.emacs.d/custom.el")
-;; (load custom-file)
+;; TODO
+;;   rspec-mode
+;;   linum-relative
+;;   robe (seeing is believing)
+;;   js-indent-level
+;;   evil-surround
