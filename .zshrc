@@ -95,12 +95,14 @@ export BUNDLER_EDITOR=atom
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
-export LDFLAGS="-L/usr/local/opt/sqlite/lib"
-export CPPFLAGS="-I/usr/local/opt/sqlite/include"
-export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
-
-source $HOME/.aliases
+if [ -f ~/.aliases  ]; then
+  source ~/.aliases
+fi
 setopt NO_NOMATCH
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Cargo PATH
+export PATH="$HOME/.cargo/bin:$PATH"
+
