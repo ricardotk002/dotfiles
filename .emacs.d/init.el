@@ -74,8 +74,9 @@
 				 :map magit-popup-mode-map
 				 ("q" . 'magit-mode-bury-buffer))
   :diminish auto-revert-mode
-  :config (setq magit-display-buffer-function
-        'magit-display-buffer-fullframe-status-topleft-v1))
+  :config (progn
+            (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-topleft-v1)
+            (setq magit-section-visibility-indicator nil)))
 
 (use-package evil-magit
   :ensure t)
