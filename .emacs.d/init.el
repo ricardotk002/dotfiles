@@ -106,7 +106,16 @@
   :hook ((rjsx-mode . prettier-js-mode)
 	 (js2-mode . prettier-js-mode)))
 
-(setq-default tab-width 2)
+(use-package add-node-modules-path
+  :ensure t)
+
+(eval-after-load 'rjsx-mode
+  '(add-hook 'js-mode-hook #'add-node-modules-path))
+
+(eval-after-load 'js2-mode
+  '(add-hook 'js2-mode-hook #'add-node-modules-path))
+
+;; (setq-default tab-width 2)
 (setq js-indent-level 2)
 
 (use-package helm
