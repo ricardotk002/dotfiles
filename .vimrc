@@ -1,6 +1,5 @@
 set encoding=utf-8
 set shell=/bin/sh
-
 set nocompatible              " be iMproved, required
 set autoindent                " set auto indent
 set ts=2                      " set indent to 2 spaces
@@ -69,7 +68,7 @@ endif
 set background=dark
 let base16colorspace=256
 " colorscheme gruvbox
-colorscheme base16-default
+colorscheme base16-default-dark
 " color Tomorrow-Night
 
 " Set font

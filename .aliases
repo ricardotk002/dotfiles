@@ -1,4 +1,4 @@
 alias rs="rails server"
 alias rc="rails console"
-alias fs="foreman start"
+alias fs="foreman start -m all=1,release=0"
 alias gs="git status"

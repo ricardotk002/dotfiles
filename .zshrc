@@ -1,5 +1,3 @@
-# RVM
-
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/rdiaz/.oh-my-zsh
 
@@ -56,9 +54,6 @@ plugins=(git)
 
 # User configuration
 
-# export PATH="/Users/rdiaz/.rvm/gems/ruby-2.2.2/bin:/Users/rdiaz/.rvm/gems/ruby-2.2.2@global/bin:/Users/rdiaz/.rvm/rubies/ruby-2.2.2/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/rdiaz/.rvm/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -88,21 +83,15 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# Base16 Shell
+# BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
+# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 export BUNDLER_EDITOR=atom
 
-export PATH="$HOME/.yarn/bin:$PATH"
-
-if [ -f ~/.aliases  ]; then
-  source ~/.aliases
-fi
 setopt NO_NOMATCH
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-# Cargo PATH
-export PATH="$HOME/.cargo/bin:$PATH"
-
