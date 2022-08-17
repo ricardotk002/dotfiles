@@ -293,6 +293,9 @@
   :config
   (unicode-fonts-setup))
 
+(use-package rust-mode
+  :ensure t)
+
 ;; Disable backup files
 ;;(setq make-backup-files nil
 ;;      vc-make-backup-files nil

@@ -95,3 +95,5 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 export BUNDLER_EDITOR=atom
 
 setopt NO_NOMATCH
+
+eval "$(mcfly init zsh)"
