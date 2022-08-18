@@ -113,8 +113,8 @@
     (funcall orig-fun proc (replace-regexp-in-string "\r\n" "\n" string)))
   (advice-add 'magit-process-filter :around #'me/magit--darwin-process-filter))
 
-(use-package evil-magit
-  :ensure t)
+;; (use-package evil-magit
+;;   :ensure t)
 
 ;; (use-package moody
 ;;   :ensure t

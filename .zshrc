@@ -96,4 +96,5 @@ export BUNDLER_EDITOR=atom
 
 setopt NO_NOMATCH
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(mcfly init zsh)"
