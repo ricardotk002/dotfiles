@@ -92,8 +92,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 # BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
 # [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
-export BUNDLER_EDITOR=atom
-
+export BUNDLER_EDITOR=code
 setopt NO_NOMATCH
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
