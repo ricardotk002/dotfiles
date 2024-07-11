@@ -86,7 +86,7 @@ export EDITOR='vim'
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
+        source "$BASE16_SHELL/profile_helper.sh"
 
 # Base16 Shell
 # BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
@@ -95,5 +95,4 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 export BUNDLER_EDITOR=code
 setopt NO_NOMATCH
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(mcfly init zsh)"

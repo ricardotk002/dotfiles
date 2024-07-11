@@ -27,3 +27,5 @@ export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
 export PATH="/usr/local/sbin:$PATH"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
